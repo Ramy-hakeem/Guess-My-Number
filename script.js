@@ -1,55 +1,55 @@
 'use strict';
-const message = document.querySelector(`.message`);
+const messageEle = document.querySelector(`.messageEle`);
 const againButton = document.querySelector(`.again`);
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
-let highscore = document.querySelector(`.highscore`);
-let latestHighscore = localStorage.getItem(`highscore`) || 0;
+let highScoreEle = document.querySelector(`.highScoreEle`);
+let latestHighscore = localStorage.getItem(`highScoreEle`) || 0;
 let body = document.querySelector(`body`);
-let number = document.querySelector(`.number`);
+let numberEle = document.querySelector(`.numberEle`);
 let scoreEle = document.querySelector(`.score`);
-
-highscore.textContent = latestHighscore;
+let guessEle = document.querySelector(`.guess`);
+highScoreEle.textContent = latestHighscore;
 let score = 20;
 againButton.addEventListener(`click`, function () {
   score = 20;
-  message.textContent = `Start guessing...`;
+  messageEle.textContent = `Start guessing...`;
   scoreEle.textContent = score;
-  document.querySelector(`.guess`).value = ``;
-  number.textContent = `?`;
+  guessEle.value = ``;
+  numberEle.textContent = `?`;
   body.style.backgroundColor = `#222`;
-  number.style.width = `15rem`;
+  numberEle.style.width = `15rem`;
   secretNumber = Math.trunc(Math.random() * 20) + 1;
 });
 document.querySelector(`.check`).addEventListener(`click`, function (e) {
   e.preventDefault();
-  const guess = Number(document.querySelector(`.guess`).value);
+  const guess = numberEle(guessEle.value);
   if (!guess) {
-    message.textContent = `⛔ No number!`;
+    messageEle.textContent = `⛔ No numberEle!`;
   } else if (guess === secretNumber) {
-    message.textContent = `🎉 Correct Number!`;
+    messageEle.textContent = `🎉 Correct numberEle!`;
     body.style.backgroundColor = `#60b347`;
-    number.style.width = `30rem`;
-    number.textContent = secretNumber;
+    numberEle.style.width = `30rem`;
+    numberEle.textContent = secretNumber;
     if (score > latestHighscore) {
-      highscore.textContent = score;
-      localStorage.setItem(`highscore`, score);
+      highScoreEle.textContent = score;
+      localStorage.setItem(`highScoreEle`, score);
     }
   } else if (guess > secretNumber) {
     if (score > 0) {
-      message.textContent = `📉 Too high!`;
+      messageEle.textContent = `📉 Too high!`;
       --score;
       scoreEle.textContent = score;
     } else {
-      message.textContent = `💥 You lost the game!`;
+      messageEle.textContent = `💥 You lost the game!`;
       scoreEle.textContent = 0;
     }
   } else if (guess < secretNumber) {
     if (score > 0) {
-      message.textContent = `📈 Too low!`;
+      messageEle.textContent = `📈 Too low!`;
       --score;
       scoreEle.textContent = score;
     } else {
-      message.textContent = `💥 You lost the game!`;
+      messageEle.textContent = `💥 You lost the game!`;
       scoreEle.textContent = 0;
     }
   }
